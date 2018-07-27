@@ -80,6 +80,11 @@
             this.groupBoxAdminReport = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBoxImporte = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.labelCambio = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -91,14 +96,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBoxAdminReport.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.SeaShell;
+            this.panel2.Controls.Add(this.panel3);
             this.panel2.Controls.Add(this.panel1);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.labelTotal);
             this.panel2.Controls.Add(this.button3);
             this.panel2.Controls.Add(this.groupBox3);
             this.panel2.Controls.Add(this.groupBox4);
@@ -205,7 +210,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(794, 243);
+            this.label1.Location = new System.Drawing.Point(16, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(94, 13);
             this.label1.TabIndex = 14;
@@ -214,18 +219,19 @@
             // labelTotal
             // 
             this.labelTotal.AutoSize = true;
-            this.labelTotal.Location = new System.Drawing.Point(868, 279);
+            this.labelTotal.Font = new System.Drawing.Font("Modern No. 20", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTotal.Location = new System.Drawing.Point(113, 26);
             this.labelTotal.Name = "labelTotal";
-            this.labelTotal.Size = new System.Drawing.Size(0, 13);
+            this.labelTotal.Size = new System.Drawing.Size(0, 38);
             this.labelTotal.TabIndex = 13;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(853, 274);
+            this.button3.Location = new System.Drawing.Point(881, 290);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 16;
-            this.button3.Text = "button3";
+            this.button3.Text = "Imprimir";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -666,6 +672,54 @@
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(16, 115);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(42, 13);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "Importe";
+            // 
+            // textBoxImporte
+            // 
+            this.textBoxImporte.Location = new System.Drawing.Point(67, 112);
+            this.textBoxImporte.Name = "textBoxImporte";
+            this.textBoxImporte.Size = new System.Drawing.Size(100, 20);
+            this.textBoxImporte.TabIndex = 18;
+            this.textBoxImporte.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(15, 175);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(42, 13);
+            this.label12.TabIndex = 19;
+            this.label12.Text = "Cambio";
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.labelCambio);
+            this.panel3.Controls.Add(this.label1);
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Controls.Add(this.labelTotal);
+            this.panel3.Controls.Add(this.textBoxImporte);
+            this.panel3.Controls.Add(this.label11);
+            this.panel3.Location = new System.Drawing.Point(783, 24);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(182, 210);
+            this.panel3.TabIndex = 20;
+            // 
+            // labelCambio
+            // 
+            this.labelCambio.AutoSize = true;
+            this.labelCambio.Font = new System.Drawing.Font("Modern No. 20", 27.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelCambio.Location = new System.Drawing.Point(60, 160);
+            this.labelCambio.Name = "labelCambio";
+            this.labelCambio.Size = new System.Drawing.Size(0, 38);
+            this.labelCambio.TabIndex = 21;
+            // 
             // PrincipalMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -685,7 +739,6 @@
             this.Text = "MODULO DE VENTAS";
             this.Load += new System.EventHandler(this.PrincipalMenu_Load);
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -699,6 +752,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBoxAdminReport.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -755,5 +810,10 @@
         private System.Windows.Forms.GroupBox groupBoxAdminReport;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label labelCambio;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.TextBox textBoxImporte;
+        private System.Windows.Forms.Label label11;
     }
 }

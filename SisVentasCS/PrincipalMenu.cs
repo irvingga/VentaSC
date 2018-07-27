@@ -21,6 +21,13 @@ namespace SisVentasCS
            
             
              
+           
+            
+        }
+
+        public PrincipalMenu( string nombre,string apellido, string cargo, string email)
+        {
+            InitializeComponent();
             dataGridViewVentaS.Columns.Add("id", "Id");
             dataGridViewVentaS.Columns.Add("idarticulo", "Articulo");
             dataGridViewVentaS.Columns.Add("cantidad_cajas", "cantidad_cajas");
@@ -29,13 +36,7 @@ namespace SisVentasCS
             dataGridViewVentaS.Columns.Add("precio_venta", "precio_venta");
             dataGridViewVentaS.Columns.Add("total", "total");
             dataGridViewVentaS.Columns.Add("descuento", "descuento");
-            
-        }
-
-        public PrincipalMenu( string nombre,string apellido, string cargo, string email)
-        {
-            InitializeComponent();
-            if(cargo=="administrador")
+            if (cargo=="administrador")
             {
                 groupBoxAdminReport.Visible = true;
             }
@@ -60,6 +61,7 @@ namespace SisVentasCS
         decimal precioventacajas;
         decimal TotalVenta;
         int CantidadpiezaVentaEnData = 0;
+        int Contador_articulo = 0;
         List<AgregarVenta.detalleventa> listaDVenta = new List<AgregarVenta.detalleventa>();
         private void llamadoclientes()
         {
@@ -69,7 +71,7 @@ namespace SisVentasCS
             while (reader.Read())
             {
                 // articuloselecionado.idcategoria = reader.GetInt32(0);
-                MessageBox.Show(reader.GetString(0));
+               // MessageBox.Show(reader.GetString(0));
 
                 lista.Add(reader.GetString(0) + "-" + reader.GetString(1));
 
@@ -149,7 +151,7 @@ namespace SisVentasCS
             listBox1.DisplayMember = "nombre";
 
             //carcargCombo();
-           // llamadoclientes();
+            llamadoclientes();
 
         }
 
@@ -390,6 +392,7 @@ namespace SisVentasCS
 
             //llamar al metodo fila
             int fila = dataGridViewVentaS.CurrentCell.RowIndex;//llamar atrael el idice de la columna seleccionada
+           // MessageBox.Show("Fila" + fila);
             if(fila!=0)
             {
                 dataGridViewVentaS.Rows.RemoveAt(fila);
@@ -410,6 +413,9 @@ namespace SisVentasCS
             for (int fila = 0; fila < dataGridViewVentaS.Rows.Count - 1; fila++)
             {
                 suma = suma + Convert.ToDecimal(dataGridViewVentaS.Rows[fila].Cells["total"].Value.ToString());
+                //Contador_articulo = fila;
+                
+
             }
 
             labelTotal.Text = suma.ToString();
@@ -417,8 +423,8 @@ namespace SisVentasCS
 
         private void button3_Click(object sender, EventArgs e)
         {
-           // cargartikect();
-            //ticket1.VistaPrevia();
+            cargartikect();
+           ticket1.Imprimir();
         }
 
         private void cargartikect()
@@ -431,31 +437,41 @@ namespace SisVentasCS
             ticket1.Encabezado("RFC: ABC12345678");
             ticket1.Encabezado("FECHA: " + DateTime.Now.ToShortDateString());
 
-
-            for (int fila = 0; fila < dataGridViewVentaS.Rows.Count - 1; fila++)
+            int Contador = dataGridViewVentaS.Rows.Count - 1;
+            for (int fila = 0; fila < Contador; fila++)
             {
 
 
 
-                ticket1.Articulo(dataGridViewVentaS.Rows[fila].Cells["Articulo"].Value.ToString(), dataGridViewVentaS.Rows[fila].Cells["cantidad_cajas"].Value.ToString(), dataGridViewVentaS.Rows[fila].Cells["cantidad_pieza"].Value.ToString(), dataGridViewVentaS.Rows[fila].Cells["precio_venta"].Value.ToString(), dataGridViewVentaS.Rows[fila].Cells["total"].Value.ToString());
-                
-
-
+                ticket1.Articulo(dataGridViewVentaS.Rows[fila].Cells["idarticulo"].Value.ToString(), dataGridViewVentaS.Rows[fila].Cells["cantidad_cajas"].Value.ToString(), dataGridViewVentaS.Rows[fila].Cells["cantidad_pieza"].Value.ToString(), dataGridViewVentaS.Rows[fila].Cells["precio_venta"].Value.ToString(), dataGridViewVentaS.Rows[fila].Cells["total"].Value.ToString());
+               
                 
 
             }
             /* ticket1.Articulo("123456789", "1 PZ", "ARTICULO DE PRUEBA NUMERO UNO", "10", "10");
              * 
              ticket1.Articulo("123453254", "2 PZ", "ARTICULO DE PRUEBA NUMERO DOS", "15", "30");*/
-            ticket1.NumArticulos("2");
-            ticket1.Total("40");
-            ticket1.Pago("EFECTIVO:", "10");
+
+           //
+            ticket1.NumArticulos(Contador.ToString());
+            ticket1.Total(labelTotal.Text.ToString());
+            ticket1.Pago("EFECTIVO:", textBoxImporte.Text.ToString());
             ticket1.Pago("DOLARES ($18.50) :", "0");
             ticket1.Pago("TARJETA:", "10");
             ticket1.Pago("VALES:", "20");
-            ticket1.Pago("CAMBIO:", "0");
+            ticket1.Pago("CAMBIO:", labelCambio.Text);
             ticket1.Pie("=================================================");
             ticket1.Pie("GRACIAS POR SU PREFERENCIA!!");
+          
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            Double Ctotal = Convert.ToDouble(labelTotal.Text);
+            Double Cimporte = Convert.ToDouble(textBoxImporte.Text);
+
+            labelCambio.Text = Convert.ToString(Cimporte-Ctotal);
+
         }
     }
     }
